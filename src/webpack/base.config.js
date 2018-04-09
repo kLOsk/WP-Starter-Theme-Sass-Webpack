@@ -1,28 +1,36 @@
 const webpack = require('webpack');
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-	entry: path.join(__dirname, '../js/app.js'),
+  entry: path.join(__dirname, '../js/app.js'),
 
-	output: {
-		filename: 'app.bundle.js',
-		path: path.join(__dirname, '../../assets')
-	},
-
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: /node_modules/,
-				loader: 'babel-loader',
-
-				// Options to configure babel with
-        query: {
-          plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-0'],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['babel-preset-env']
+          }
         }
-			},
-			// the url-loader uses DataUrls.
+      },
+
+      //Process SCSS
+      {
+        test: /\.(scss|css)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            { loader: 'css-loader', options: { sourceMap: true } },
+            { loader: 'postcss-loader', query: {config: { path: 'webpack/postcss.config.js' } } },
+            { loader: 'sass-loader' }
+          ]
+        })
+      },
+      // the url-loader uses DataUrls.
       // the file-loader emits files.
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
@@ -32,14 +40,22 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot|svg)(\?[\s\S]+)?$/,
-        use: 'file-loader'
+        use: [
+          { loader: 'file-loader', options: { outputPath: '../fonts/', name: '[name].[ext]' } }
+        ]
       },
-		]
-	},
+    ]
+  },
 
-	plugins: [
-		new webpack.EnvironmentPlugin([
+  plugins: [
+    new webpack.EnvironmentPlugin([
       'NODE_ENV'
     ])
-	]
+  ]
 };
+
+if(process.env.NODE_ENV === 'production') {
+
+} else {
+
+}

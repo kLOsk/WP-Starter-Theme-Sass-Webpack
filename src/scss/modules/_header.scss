@@ -4,10 +4,6 @@
   left: 0;
   right: 0;
 
-  @include breakpoint(medium) {
-    height: 3.4rem;
-  }
-  
   a {
     color: $white;
 
@@ -25,7 +21,7 @@
   .site-brand {
     font-weight: bold;
     text-transform: uppercase;
-  } 
+  }
 
   .title-bar .title-bar-title {
     padding-left: 0.5rem;
@@ -35,25 +31,5 @@
   .current_page_item {
     font-weight: bold;
   }
-  
-}
 
-/**
- * Preventing FOUC
- * http://foundation.zurb.com/sites/docs/responsive-navigation.html#preventing-fouc
- */
-.no-js {
-  @include breakpoint(small only) {
-    .top-bar {
-      display: none;
-    }
-  }
-
-  @include breakpoint(medium) {
-
-    .menu .sub-menu,
-    .title-bar {
-      display: none;
-    }
-  }
 }

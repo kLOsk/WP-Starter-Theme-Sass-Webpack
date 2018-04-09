@@ -1,14 +1,8 @@
-// Import Foundation 
-import 'script-loader!what-input/dist/what-input';
-import 'script-loader!foundation-sites/dist/js/foundation';
+'use strict';
 
 // Import the apps styles
 import sass from '../scss/app.scss'
 
 // Import our modules
+import './modules/_main.js'
 import './modules/_header.js'
-
-// Foundation init
-$(function() {
-  $(document).foundation();
-});

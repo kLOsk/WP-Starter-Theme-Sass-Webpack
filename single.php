@@ -1,37 +1,41 @@
 <?php
 /**
- * This is the default template file posts
+ * Theme: Flat Bootstrap
+ * 
+ * The Template for displaying all single posts.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package flat-bootstrap
  */
-get_header();
-?>
-<main class="single-container grid-container" role="main">
-	<div class="grid-x grid-padding-x">
 
-		<div class="post-container medium-9 cell">
+get_header(); ?>
+
+<?php get_template_part( 'content', 'header' ); ?>
+
+<div class="container">
+<div id="main-grid" class="row">
+
+	<div id="primary" class="content-area col-md-8">
+		<main id="main" class="site-main" role="main">
+
+		<?php while ( have_posts() ) : the_post(); ?>
+
+			<?php get_template_part( 'content', 'single' ); ?>
+
 			<?php
-				if (have_posts()):
+				// If comments are open or we have at least one comment, load up the comment template
+				if ( comments_open() || '0' != get_comments_number() )
+					comments_template();
+			?>
 
-					while ( have_posts() ) : the_post();
-						get_template_part( 'parts/posts/content', get_post_type() );
-					endwhile;
-					
-					echo "<div class=\"posts-navigation below\">";
-						the_posts_pagination(array(
-							'prev_text' => __( 'Previous page', 'hsl' ),
-							'next_text' => __( 'Next page', 'hsl' ),
-							'before_page_number' => __( 'Page', 'hsl' ),
-						));
-					echo "</div>";
-        else:
-          get_template_part( 'parts/posts', 'none' ); 	
-        endif;
-      ?>
-    </div>
-    <div class="posts-sidebar medium-3 cell">
-      <?php get_sidebar(); ?>
-    </div>	
+		<?php endwhile; // end of the loop. ?>
 
-	</div>
-</main>
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
-<?php get_footer();
+<?php get_sidebar(); ?>
+</div><!-- .row -->
+</div><!-- .container -->
+
+<?php get_footer(); ?>

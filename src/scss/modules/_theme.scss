@@ -1,0 +1,427 @@
+$color_1: #19b798;
+$color_2: #555;
+$white: #fff;
+$darkgreen: #16a085;
+$color_7: #95a5a6;
+$offwhite: #f2f2f2;
+$color_9: #3bc492;
+$color_10: #bdc3c7;
+$color_11: #a1a1a1;
+$font_body: "Lato", "Helvetica Neue", Arial, sans-serif;
+$font_header: "Raleway", Arial, "Helvetica Neue", sans-serif;
+$lightgreen: #1abc9c;
+$midnightblue: #34495e;
+$almostblack: #2f2f2f;
+$notquiteblack : #222222;
+
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Typography
+# Elements
+# Forms and Buttons
+# Navigation
+  ## Links
+  ## Menus
+# Content
+  ## Header
+  ## Footer
+  ## Posts and pages
+  ## Comments
+# Media
+  ## Captions and Galleries
+# Widgets & Plugins
+  ## Widgets
+  ## Plugins
+
+--------------------------------------------------------------*/
+
+/*
+ * Note that most styles are handled already in our custom bootstrap.css, theme-base.css,
+ * and theme-flat.css files.
+ *
+ * We have put comments next to some of the styles to show what our custom bootstrap.css
+ * defaults to in case we (or anyone) wants to put these into custom bootstrap.css
+ * instead.
+ */
+
+/*--------------------------------------------------------------
+# Typography
+--------------------------------------------------------------*/
+/*
+ * The cool thing about Lato and Raleway fonts is that they look great at light (300) and
+ * regular (500) font weight. So we only use bold (700) sparingly.
+ */
+body {
+  font-family: $font_body;
+    font-weight: 300; /*Bootstrap is 500;*/
+    font-size: 18px; /*BS is 16px;*/
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font_header; /*"Helvetica Neue", Helvetica, Arial, sans-serif;*/
+}
+
+/* Lighten the h1-h3 headings so you can use <b> tags to have certain words stand out */
+h1,
+h2,
+h3 {
+    font-weight: 300; /*BS is 500 for h1-h6, including .h1-.h6*/
+}
+
+/*--------------------------------------------------------------
+# Elements
+--------------------------------------------------------------*/
+
+/* Increase font size on article "lead" (usually for an "intro" paragraph */
+.lead {
+  font-size: 22px; /*18px, but goes to 24px @768 browser width */
+}
+
+/* Style code tag like pre tag */
+code {
+    /*color: #$almostblack;
+    background-color: #f5f5f5; Moved to bootstrap.css*/
+  border: 1px solid #ccc;
+}
+
+/* Remove a bit of margin since Bootstrap h1-h3 tags already have 22px top margin */
+ hr {
+    margin: 16px 0; /*22px 0;*/
+}
+
+/*
+ * Override margins on jumbotron in case someone uses it like a colored "section" from
+ * this theme. Note: Moved here from theme-base.css.
+ */
+.jumbotron {
+  margin-bottom: 0;
+}
+
+/*
+ * Set block quote footer (author) to larger font size. BS quote is 20px, but footer
+ * is only 14px for some reason.
+ */
+blockquote footer {
+  font-size: 18px;
+}
+
+/* Color the collapsible panel hover color to match the link hover color */
+.panel-title>a:hover,
+.panel-title>small:hover,
+.panel-title>.small:hover,
+.panel-title>small>a:hover,
+.panel-title>.small>a:hover {
+  color: #19b798;
+}
+
+/*--------------------------------------------------------------
+# Forms and Buttons
+--------------------------------------------------------------*/
+
+/* Tone down field labels on forms, comments section, etc. */
+label {
+  font-weight: 300;
+}
+
+/* Match the default font color */
+.form-control {
+  color: #555;
+}
+
+/*
+ * Generically set input buttons to look like Bootstrap, but set colors below that to make
+ * it easier for users to override. Match Bootstrap btn-primary styles.
+ */
+button,
+html input[type="button"],
+input[type="submit"] {
+    background-image: none;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 6px 12px;
+    border: none;
+  border-radius: 4px;
+    outline: 0;
+}
+button:hover,
+button:focus,
+html input[type="button"]:hover,
+html input[type="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    outline: 0;
+}
+
+/* Set colors for input buttons (Search, Reply). Change these in your child theme. */
+button,
+html input[type="button"],
+input[type="submit"] {
+    color: $white;
+    background-color: $lightgreen;
+    border-color: $lightgreen;
+}
+button:hover,
+button:focus,
+html input[type="button"]:hover,
+html input[type="button"]:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    color: $white;
+    background-color: $darkgreen;
+    border-color: $darkgreen;
+}
+
+/* Bootstrap uses "active" style on the <li>, but WordPress paginate_links() uses
+ * "current" in a <span> tag on the link. Also set the hover to match the primary button
+ * color.
+ */
+.pagination>li>a,
+.pagination>li>span,
+span.page-numbers.current {
+  color: $darkgreen;
+}
+.pagination>li>a:hover,
+.pagination>li>span:hover,
+.pagination>li>a:focus,
+.pagination>li>span:focus,
+span.page-numbers.current {
+  z-index: 2;
+  color: $white;
+    background-color: $darkgreen;
+    border-color: $darkgreen;
+}
+
+/* Force search field to not be rounded on iOS devices */
+input.search-field {
+  -webkit-appearance: none !important;
+  -webkit-border-radius: 0 !important;
+  -moz-border-radius: 0 !important;
+  border-radius: 0 !important;
+}
+
+/*--------------------------------------------------------------
+# Navigation
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Links
+--------------------------------------------------------------*/
+
+/*
+ * Generically style the links here. Set colors below to make it easier for users to
+ * override.
+ */
+a {
+    word-wrap: break-word;
+    transition: color .1s ease-in, background .1s ease-in;
+}
+
+a:hover,
+a:focus {
+    text-decoration: none;
+    outline: 0;
+}
+a:before,
+a:after,
+a:hover i:before,
+a:focus i:before {
+    -webkit-transition: color .1s ease-in, background .1s ease-in;
+    -moz-transition: color .1s ease-in, background .1s ease-in;
+    -ms-transition: color .1s ease-in, background .1s ease-in;
+    -o-transition: color .1s ease-in, background .1s ease-in;
+    transition: color .1s ease-in, background .1s ease-in;
+}
+
+/*--------------------------------------------------------------
+## Menus
+--------------------------------------------------------------*/
+
+/* Since we lightened the body font, make the site title regular font weight */
+.navbar-brand {
+  font-weight: 500;
+  /*height: 50px; BS already 50px*/ /* Fixes layout if nav bar wraps before collapsing for mobile */
+}
+
+/*
+ * Line up the navbar with the header and page content (it's in a container, but not a
+ * row)
+ */
+div.navbar-collapse.collapse {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+/* Since we lightened the body font, increase font weight on active tab */
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+  color: inherit;
+  font-weight: 500;
+}
+
+/*--------------------------------------------------------------
+# Content
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+## Header
+--------------------------------------------------------------*/
+
+/* Set content (page title) header to midnight blue */
+.content-header {
+  background-color: $midnightblue;
+  color: $white;
+}
+.content-header h1,
+.content-header h2,
+.content-header h3 {
+  color: $white;
+}
+
+/*--------------------------------------------------------------
+## Footer
+--------------------------------------------------------------*/
+
+/* Set our footer to "almost" black */
+.sidebar-footer {
+  background-color: $almostblack;
+  color: $white;
+}
+
+.sidebar-footer h1,
+.sidebar-footer h2,
+.sidebar-footer h3 {
+  color: $white;
+}
+
+/* Set our "after footer" (footer nav menu and site credits) to "not quite" black */
+.after-footer {
+  background: $notquiteblack;
+  color: $white;
+  font-size: 16px;
+}
+
+/* Set link colors to off white and text to gray for footer and after footer */
+.sidebar-footer,
+/*.after-footer {*/
+.footer-nav-menu {
+  color: #95a5a6;
+}
+.sidebar-footer a:not(.btn),
+.footer-nav-menu a:not(.btn) {
+/*.after-footer a:not(.btn) {*/
+  color: $offwhite;
+}
+.sidebar-footer a:hover:not(.btn),
+.sidebar-footer a:focus:not(.btn),
+.footer-nav-menu a:hover:not(.btn),
+.footer-nav-menu a:focus:not(.btn) {
+/*.after-footer a:hover:not(.btn),
+.after-footer a:focus:not(.btn) {*/
+  color: #3bc492;
+}
+
+/*--------------------------------------------------------------
+## Posts and pages
+--------------------------------------------------------------*/
+
+/* Reduce the size of post entry meta (date, author) */
+.entry-meta {
+  font-size: 16px;
+}
+
+/* Color "sticky" (featured) posts */
+.sticky .entry-title:after {
+  background-color: $lightgreen;
+  color: $white;
+}
+
+/*--------------------------------------------------------------
+## Comments
+--------------------------------------------------------------*/
+
+/* Reduce the size of comment edit link */
+.comment-edit-link {
+  font-size: 16px;
+}
+
+/*--------------------------------------------------------------
+# Media
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+## Captions and Galleries
+--------------------------------------------------------------*/
+
+/* Color and style the Bootstrap carousel captions */
+.carousel-caption,
+.carousel-caption h4,
+.carousel-caption p {
+  font-weight: bold;
+}
+.carousel-caption {
+  text-shadow: none;
+  background-color: $darkgreen;
+  color: $white;
+  opacity: .75;
+  font-weight: bold;
+}
+.carousel-caption a {
+  color: $white;
+  text-decoration: underline;
+}
+.carousel-caption a:hover,
+.carousel-caption a:focus {
+    color: #bdc3c7; /*silver*/
+}
+
+/*--------------------------------------------------------------
+# Widgets and Plugins
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+## Widgets
+--------------------------------------------------------------*/
+
+/* Get Jetpack Popular Posts Widget to look like other thumbnail posts */
+.widgets-list-layout-links {
+  float: left !important;
+  margin-left: 15px !important;
+  /*margin-left: 1.625em !important;*/
+}
+
+/*--------------------------------------------------------------
+## Plugins
+--------------------------------------------------------------*/
+
+/* Format Jetpack contact form with Bootstrap's form-control tag. */
+form.contact-form input[type='text'],
+form.contact-form input[type='email'],
+form.contact-form textarea {
+    display: block;
+    width: 98%;
+    height: 36px;
+    padding: 6px 12px;
+    font-size: 16px;
+    line-height: 1.428571429;
+    color: #a1a1a1;
+    background-color: $white;
+    background-image: none;
+    border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+}
+form.contact-form input[type='text']:focus,
+form.contact-form input[type='email']:focus,
+form.contact-form textarea:focus {
+    color: #555;
+}

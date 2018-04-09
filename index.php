@@ -1,43 +1,69 @@
 <?php
 /**
- * This is the default template file for indexes (list of blog/news posts)
+ * Theme: Flat Bootstrap
+ * 
+ * The main template file.
+ *
+ * This is the most generic template file in a WordPress theme
+ * and one of the two required files for a theme (the other being style.css).
+ * It is used to display a page when nothing more specific matches a query.
+ * E.g., it puts together the home page when no home.php file exists.
+ * Learn more: http://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package flat-bootstrap
  */
 
-$index_page_title = get_the_title( get_option('page_for_posts', true) );
-get_header();
-?>
-<main class="index-container grid-container" role="main">
-	<header class="page-header grid-x grid-padding-x">
-		<div class="cell">
-			<h1 class="page-title"><?php _e( $index_page_title, 'hsl' ); ?></h1>
-		</div>
-	</header>
-	
-	<div class="grid-x grid-padding-x">
-		<div class="posts-container medium-9 cell">
-			<?php
-				if (have_posts()):
-					
-					while ( have_posts() ) : the_post();
-						get_template_part( 'parts/posts/content', 'index' );
-					endwhile;
-					
-					echo "<div class=\"posts-navigation below\">";
-						the_posts_pagination(array(
-							'prev_text' => __( 'Previous page', 'hsl' ),
-							'next_text' => __( 'Next page', 'hsl' ),
-							'before_page_number' => __( 'Page', 'hsl' ),
-						));
-					echo "</div>";
-					
-				else:
-					get_template_part( 'parts/posts', 'none' ); 	
-				endif;
-			?>
-		</div>
-		<div class="posts-sidebar medium-3 cell">
-			<?php get_sidebar(); ?>
-		</div>
-	</div>
-</main>
+get_header(); ?>
+
+<?php get_template_part( 'content', 'header' ); ?>
+
+<?php get_sidebar( 'home' ); ?>
+
+<div class="container">
+<div id="main-grid" class="row">
+
+	<section id="primary" class="content-area col-md-8">
+		<main id="main" class="site-main" role="main">
+
+		<?php if ( have_posts() ) : ?>
+
+			<?php /* Start the Loop */ ?>
+			<?php while ( have_posts() ) : the_post(); ?>
+
+				<?php
+				if ( get_post_format() != 'page' AND get_post_format() != 'post' ) {
+					/* Include the Post-Type-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Type name) and that
+					 * will be used instead.
+					 */
+					get_template_part( 'content', get_post_type() );
+				} else {
+					/* Include the Post-Format-specific template for the content.
+					 * If you want to override this in a child theme, then include a file
+					 * called content-___.php (where ___ is the Post Format name) and that
+					 * will be used instead.
+					 */
+					get_template_part( 'content', get_post_format() );
+				}
+				?>
+
+			<?php endwhile; ?>
+
+			<?php get_template_part( 'content', 'index-nav' ); ?>
+
+		<?php else : ?>
+
+			<?php get_template_part( 'no-results', 'index' ); ?>
+
+		<?php endif; ?>
+
+		</main><!-- #main -->
+	</section><!-- #primary -->
+
+	<?php get_sidebar(); ?>
+
+</div><!-- .row -->
+</div><!-- .container -->
+
 <?php get_footer(); ?>
